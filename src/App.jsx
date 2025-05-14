@@ -35,7 +35,7 @@ function App() {
 
         <div className="actions">
           <label className="file-button">
-            Escolher ficheiro
+            Escolher imagem
             <input
               type="file"
               accept="image/*"
