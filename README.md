@@ -21,6 +21,7 @@ npm -v
 Após clonar o repositório, é necessário instalar as dependências e iniciar o servidor
 ```bash
 npm install
+npm install jszip
 npm run dev
 ````
 
