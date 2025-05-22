@@ -130,3 +130,31 @@ body {
   color: #5b3c2a;
   text-align: center;
 }
+
+.tag {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem; 
+  font-weight: 600;
+  margin: 0 0.2rem 0.2rem 0; 
+  text-transform: uppercase;
+  white-space: nowrap; 
+}
+
+.tag-neutral {
+  background-color: #f0f0f0; 
+  color: #555; 
+  border: 1px solid #ddd; 
+}
+
+.tag-color {
+  border: 1px solid currentColor; /* Borda com a cor do texto */
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}

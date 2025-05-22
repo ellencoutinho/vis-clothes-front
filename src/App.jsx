@@ -2,6 +2,22 @@ import { useState, useRef, useEffect } from "react";
 import "./App.css";
 import JSZip from "jszip";
 
+
+const COLOR_MAP = {
+  // Cores de fundo e do texto das tags
+  "Vermelho": { bg: "#FF0000", text: "#FFFFFF" },
+  "Azul": { bg: "#0000FF", text: "#FFFFFF" },
+  "Verde": { bg: "#008000", text: "#FFFFFF" },
+  "Amarelo": { bg: "#FFFF00", text: "#8B4513" },
+  "Preto": { bg: "#000000", text: "#FFFFFF" },
+  "Branco": { bg: "#FFFFFF", text: "#000000" },
+  "Laranja": { bg: "#FFA500", text: "#FFFFFF" },
+  "Roxo": { bg: "#800080", text: "#FFFFFF" },
+  "Rosa": { bg: "#FFC0CB", text: "#8B0000" },
+  "Marrom": { bg: "#A52A2A", text: "#FFFFFF" },
+  "Cinza": { bg: "#808080", text: "#FFFFFF" },
+};
+
 function App() {
   const [imagesWithInfo, setImagesWithInfo] = useState([]);
   const fileInputRef = useRef(null);
@@ -42,7 +58,7 @@ function App() {
             zipEntry.async("blob").then((blob) => ({
               name: relativePath,
               url: URL.createObjectURL(blob),
-              info: null, // Inicialmente sem informação
+              info: null,
             }))
           );
         }
@@ -57,7 +73,7 @@ function App() {
   };
 
   const getRandomColor = () => {
-    const colors = ["Vermelho", "Azul", "Verde", "Amarelo", "Preto", "Branco"];
+    const colors = Object.keys(COLOR_MAP);
     return colors?.[Math.floor(Math.random() * colors.length)];
   };
 
@@ -107,10 +123,28 @@ function App() {
               <p className="image-name-new">{imageInfo.name}</p>
             </div>
             {imageInfo.info && (
-              <p className="simple-result-new">
-                Tipo: {imageInfo.info.tipo} | Cor: {imageInfo.info.cor} |
-                Estampa: {imageInfo.info.estampa}
-              </p>
+              <div className="tags-container">
+                {/* Tag de Tipo */}
+                <span className="tag tag-neutral">
+                  {imageInfo.info.tipo}
+                </span>
+
+                {/* Tag de Estampa */}
+                <span className="tag tag-neutral">
+                  {imageInfo.info.estampa}
+                </span>
+
+                {/* Tag de Cor */}
+                <span
+                  className="tag tag-color"
+                  style={{
+                    backgroundColor: COLOR_MAP[imageInfo.info.cor]?.bg || "#ccc", // Fundo da cor mapeada ou padrão
+                    color: COLOR_MAP[imageInfo.info.cor]?.text || "#333" // Cor do texto mapeada ou padrão
+                  }}
+                >
+                  {imageInfo.info.cor}
+                </span>
+              </div>
             )}
           </div>
         ))}
